@@ -61,7 +61,7 @@ class _InputFieldState extends State<InputField> {
           alignment: Alignment.centerLeft,
           padding: fieldPadding,
           decoration:
-              widget.isReadOnly ? disabledFieldDecortaion : fieldDecortaion,
+              widget.isReadOnly ? disabledFieldDecoration : fieldDecoration,
           child: Row(
             children: <Widget>[
               Expanded(

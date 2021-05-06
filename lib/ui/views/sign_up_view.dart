@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../view_models/signup_view_model.dart';
+import '../../view_models/sign_up_view_model.dart';
 import '../shared/ui_helpers.dart';
 import '../widgets/busy_button.dart';
+import '../widgets/expansion_list.dart';
 import '../widgets/input_field.dart';
 
 class SignUpView extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final fullNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,11 @@ class SignUpView extends StatelessWidget {
                 ),
               ),
               verticalSpaceLarge,
-              // TODO: Add additional user data here to save (episode 2)
+              InputField(
+                placeholder: 'Full Name',
+                controller: fullNameController,
+              ),
+              verticalSpaceSmall,
               InputField(
                 placeholder: 'Email',
                 controller: emailController,
@@ -41,6 +47,12 @@ class SignUpView extends StatelessWidget {
                 controller: passwordController,
                 additionalNote: 'Password has to be a minimum of 6 characters.',
               ),
+              verticalSpaceSmall,
+              ExpansionList<String>(
+                items: ['Admin', 'User'],
+                title: model.selectedRole,
+                onItemSelected: model.setSelectedRole,
+              ),
               verticalSpaceMedium,
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -51,8 +63,10 @@ class SignUpView extends StatelessWidget {
                     busy: model.busy,
                     onPressed: () {
                       model.signUp(
-                          email: emailController.text,
-                          password: passwordController.text);
+                        email: emailController.text,
+                        password: passwordController.text,
+                        fullName: fullNameController.text,
+                      );
                     },
                   )
                 ],

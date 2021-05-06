@@ -1,6 +1,7 @@
 # firebase_authentication
 
-Firebase Authentication in Flutter.
+1. Firebase Authentication in Flutter.
+2. StartUp Logic and User Profiles using FireBase and FireStore
 
 ## Getting Started
 

@@ -30,9 +30,13 @@ class LoginViewModel extends BaseModel {
       }
     } else {
       await _dialogService.showDialog(
-        title: 'Sign Up Failure',
+        title: 'Login Failure',
         description: result,
       );
     }
+  }
+
+  void navigateToSignUp() {
+    _navigationService.navigateTo(SignUpViewRoute);
   }
 }

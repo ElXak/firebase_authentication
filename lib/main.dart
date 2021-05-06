@@ -6,7 +6,7 @@ import 'managers/dialog_manager.dart';
 import 'services/dialog_service.dart';
 import 'services/navigation_service.dart';
 import 'ui/router.dart';
-import 'ui/views/login_view.dart';
+import 'ui/views/start_up_view.dart';
 
 Future<void> main() async {
   // Register all the models and services before the app starts
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             ),
       ),
       // home: SignUpView(),
-      home: LoginView(),
+      home: StartUpView(),
       onGenerateRoute: generateRoute,
     );
   }

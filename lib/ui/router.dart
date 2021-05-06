@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants/route_names.dart';
 import '../ui/views/home_view.dart';
 import '../ui/views/login_view.dart';
-import '../ui/views/signup_view.dart';
+import '../ui/views/sign_up_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
