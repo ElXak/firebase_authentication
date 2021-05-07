@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/route_names.dart';
+import '../models/post.dart';
 import 'views/create_post_view.dart';
 import 'views/home_view.dart';
 import 'views/login_view.dart';
@@ -24,9 +25,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         viewToShow: HomeView(),
       );
     case CreatePostViewRoute:
+      Post? postToEdit = settings.arguments as Post?;
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: CreatePostView(),
+        viewToShow: CreatePostView(postToEdit: postToEdit),
       );
     default:
       return MaterialPageRoute(

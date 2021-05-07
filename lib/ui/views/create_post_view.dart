@@ -1,3 +1,4 @@
+import 'package:firebase_authentication/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -6,12 +7,21 @@ import '../shared/ui_helpers.dart';
 import '../widgets/input_field.dart';
 
 class CreatePostView extends StatelessWidget {
-  final titleController = TextEditingController();
+  final TextEditingController? titleController = TextEditingController();
+  final Post? postToEdit;
+
+  CreatePostView({Key? key, this.postToEdit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CreatePostViewModel>.reactive(
       viewModelBuilder: () => CreatePostViewModel(),
+      onModelReady: (model) {
+        // update the text in the controller
+        titleController!.text = postToEdit?.title ?? '';
+
+        model.setPostToEdit(postToEdit);
+      },
       builder: (context, model, child) => Scaffold(
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
@@ -25,7 +35,7 @@ class CreatePostView extends StatelessWidget {
               ),
               verticalSpaceMedium,
               InputField(
-                controller: titleController,
+                controller: titleController!,
                 placeholder: 'Title',
               ),
               verticalSpaceMedium,
@@ -50,7 +60,7 @@ class CreatePostView extends StatelessWidget {
               !model.busy ? Theme.of(context).primaryColor : Colors.grey[600],
           onPressed: () {
             if (!model.busy) {
-              model.addPost(title: titleController.text);
+              model.addPost(title: titleController!.text);
             }
           },
           child: !model.busy

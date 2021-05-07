@@ -1,6 +1,5 @@
-import 'package:firebase_authentication/models/post.dart';
-
 import '../locator.dart';
+import '../models/post.dart';
 import '../services/dialog_service.dart';
 import '../services/firestore_service.dart';
 import '../services/navigation_service.dart';
@@ -11,10 +10,25 @@ class CreatePostViewModel extends BaseModel {
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
+  Post? _postToEdit;
+
+  bool get _editting => _postToEdit != null;
+
   Future addPost({required String title}) async {
     setBusy(true);
-    var result = await _firestoreService
-        .addPost(Post(title: title, userId: currentUser.id!));
+    var result;
+
+    if (!_editting) {
+      result = await _firestoreService
+          .addPost(Post(title: title, userId: currentUser.id!));
+    } else {
+      result = await _firestoreService.updatePost(Post(
+        title: title,
+        userId: _postToEdit!.userId,
+        id: _postToEdit!.id,
+      ));
+    }
+
     setBusy(false);
 
     if (result is String) {
@@ -30,5 +44,9 @@ class CreatePostViewModel extends BaseModel {
     }
 
     _navigationService.pop();
+  }
+
+  void setPostToEdit(Post? postToEdit) {
+    _postToEdit = postToEdit;
   }
 }

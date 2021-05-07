@@ -12,7 +12,8 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
-      onModelReady: (model) => model.fetchPosts(),
+      // onModelReady: (model) => model.fetchPosts(),
+      onModelReady: (model) => model.listenToPosts(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
@@ -34,8 +35,12 @@ class HomeView extends StatelessWidget {
                 child: model.posts != null
                     ? ListView.builder(
                         itemCount: model.posts!.length,
-                        itemBuilder: (context, index) => PostItem(
-                          post: model.posts![index],
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () => model.editPost(index),
+                          child: PostItem(
+                            post: model.posts![index],
+                            onDeleteItem: () => model.deletePost(index),
+                          ),
                         ),
                       )
                     : Center(

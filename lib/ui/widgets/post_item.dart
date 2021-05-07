@@ -4,8 +4,9 @@ import '../../models/post.dart';
 
 class PostItem extends StatelessWidget {
   final Post? post;
+  final Function? onDeleteItem;
 
-  const PostItem({Key? key, this.post}) : super(key: key);
+  const PostItem({Key? key, this.post, this.onDeleteItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,14 @@ class PostItem extends StatelessWidget {
               child: Text(post!.title),
             ),
           ),
-          IconButton(icon: Icon(Icons.close), onPressed: () {})
+          IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              if (onDeleteItem != null) {
+                onDeleteItem!();
+              }
+            },
+          )
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import '../constants/route_names.dart';
 import '../locator.dart';
+import '../models/dialog_models.dart';
 import '../models/post.dart';
 import '../services/dialog_service.dart';
 import '../services/firestore_service.dart';
@@ -15,6 +16,7 @@ class HomeViewModel extends BaseModel {
 
   List<Post?>? get posts => _posts;
 
+/*
   Future fetchPosts() async {
     setBusy(true);
     var postsResult = await _firestoreService.getPostsOnceOff();
@@ -30,9 +32,44 @@ class HomeViewModel extends BaseModel {
       );
     }
   }
+*/
+
+  void listenToPosts() {
+    setBusy(true);
+
+    _firestoreService.listenToPostsRealTime().listen((postsData) {
+      List<Post?>? updatePosts = postsData;
+      if (updatePosts != null && updatePosts.length > 0) {
+        _posts = updatePosts;
+        notifyListeners();
+      }
+
+      setBusy(false);
+    });
+  }
+
+  Future deletePost(int index) async {
+    DialogResponse dialogResponse = await _dialogService.showConfirmationDialog(
+      title: 'Are you sure?',
+      description: 'Do you really want to delete the post?',
+      confirmationTitle: 'Yes',
+      cancelTitle: 'No',
+    );
+
+    if (dialogResponse.confirmed!) {
+      setBusy(true);
+      await _firestoreService.deletePost(_posts![index]!.id!);
+      setBusy(false);
+    }
+  }
 
   Future navigateToCreateView() async {
     await _navigationService.navigateTo(CreatePostViewRoute);
-    await fetchPosts();
+    // await fetchPosts();
+  }
+
+  void editPost(int index) {
+    _navigationService.navigateTo(CreatePostViewRoute,
+        arguments: _posts![index]);
   }
 }
