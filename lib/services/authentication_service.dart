@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 import '../locator.dart';
 import '../models/user.dart' as userModel;
@@ -22,6 +23,8 @@ class AuthenticationService {
       await _populateCurrentUser(authResult.user);
       return authResult.user != null;
     } catch (e) {
+      if (e is PlatformException) return e.message;
+
       return e.toString();
     }
   }
@@ -48,6 +51,8 @@ class AuthenticationService {
 
       return authResult.user != null;
     } catch (e) {
+      if (e is PlatformException) return e.message;
+
       return e.toString();
     }
   }

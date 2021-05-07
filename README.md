@@ -2,6 +2,7 @@
 
 1. Firebase Authentication in Flutter.
 2. StartUp Logic and User Profiles using FireBase and FireStore
+3. CRUD with FireStore using Future
 
 ## Getting Started
 

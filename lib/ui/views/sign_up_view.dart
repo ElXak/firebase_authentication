@@ -26,9 +26,7 @@ class SignUpView extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Sign Up',
-                style: TextStyle(
-                  fontSize: 38,
-                ),
+                style: TextStyle(fontSize: 38),
               ),
               verticalSpaceLarge,
               InputField(

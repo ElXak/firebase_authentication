@@ -21,21 +21,22 @@ class InputField extends StatefulWidget {
   final Function(String)? onChanged;
   final TextInputFormatter? formatter;
 
-  InputField(
-      {required this.controller,
-      required this.placeholder,
-      this.enterPressed,
-      this.fieldFocusNode,
-      this.nextFocusNode,
-      this.additionalNote,
-      this.onChanged,
-      this.formatter,
-      this.validationMessage,
-      this.textInputAction = TextInputAction.next,
-      this.textInputType = TextInputType.text,
-      this.password = false,
-      this.isReadOnly = false,
-      this.smallVersion = false});
+  InputField({
+    required this.controller,
+    required this.placeholder,
+    this.enterPressed,
+    this.fieldFocusNode,
+    this.nextFocusNode,
+    this.additionalNote,
+    this.onChanged,
+    this.formatter,
+    this.validationMessage,
+    this.textInputAction = TextInputAction.next,
+    this.textInputType = TextInputType.text,
+    this.password = false,
+    this.isReadOnly = false,
+    this.smallVersion = false,
+  });
 
   @override
   _InputFieldState createState() => _InputFieldState();

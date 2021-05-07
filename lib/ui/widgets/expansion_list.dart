@@ -8,13 +8,13 @@ class ExpansionList<T> extends StatefulWidget {
   final Function(dynamic) onItemSelected;
   final bool smallVersion;
 
-  ExpansionList(
-      {Key? key,
-      this.items,
-      this.title,
-      required this.onItemSelected,
-      this.smallVersion = false})
-      : super(key: key);
+  ExpansionList({
+    Key? key,
+    this.items,
+    this.title,
+    required this.onItemSelected,
+    this.smallVersion = false,
+  }) : super(key: key);
 
   @override
   _ExpansionListState createState() => _ExpansionListState();
@@ -107,13 +107,13 @@ class ExpansionListItem extends StatelessWidget {
   final bool showArrow;
   final bool smallVersion;
 
-  const ExpansionListItem(
-      {Key? key,
-      this.onTap,
-      this.title,
-      this.showArrow = false,
-      this.smallVersion = false})
-      : super(key: key);
+  const ExpansionListItem({
+    Key? key,
+    this.onTap,
+    this.title,
+    this.showArrow = false,
+    this.smallVersion = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
